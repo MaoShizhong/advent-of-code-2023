@@ -23,7 +23,7 @@ function substituteNumWordsWithDigits(string) {
 
 const numbers = input.map((str) => {
     const substitutedStr = substituteNumWordsWithDigits(str);
-    const digits = substitutedStr.match(/\d/g) ?? [];
+    const digits = substitutedStr.match(/\d/g) ?? []; // or substitutedStr.replaceAll(/[^\d]/g, '')
     const num = `${digits.at(0)}${digits.at(-1)}`;
 
     return +num;
