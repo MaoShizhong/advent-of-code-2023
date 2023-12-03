@@ -1,4 +1,6 @@
-import { input } from './data.js';
+import { dataToStringArray } from '../readFile.js';
+
+const input = dataToStringArray('data.txt', import.meta.url);
 
 // overlapping number words never more than 1 char
 const validWordReplacements = {

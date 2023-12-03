@@ -1,4 +1,6 @@
-import { games } from './data.js';
+import { dataToStringArray } from '../readFile.js';
+
+const games = dataToStringArray('data.txt', import.meta.url);
 
 const cubePowers = [];
 

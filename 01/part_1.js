@@ -1,4 +1,8 @@
-import { input } from './data.js';
+import { dataToStringArray } from '../readFile.js';
+
+const input = dataToStringArray('data.txt', import.meta.url);
+
+console.log(input);
 
 const numbers = input.map((str) => {
     const digits = str.match(/\d/g) ?? [];
