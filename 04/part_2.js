@@ -14,7 +14,7 @@ for (let id of Object.keys(cardCounts)) {
     }
 }
 
-const totalCards = Object.values(cardCounts).reduce((a, c) => a + +c, 0);
+const totalCards = Object.values(cardCounts).reduce((a, c) => a + c);
 console.log('Total cards:', totalCards);
 
 function countWinningNums(scratchCard) {
