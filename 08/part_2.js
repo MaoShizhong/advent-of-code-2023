@@ -51,7 +51,7 @@ function lowestCommonMultiple(...nums) {
     if (nums.length === 2) {
         return (nums[0] * nums[1]) / greatestCommonDivisor(nums[0], nums[1]);
     } else {
-        return lowestCommonMultiple(nums[0], lowestCommonMultiple(nums.slice(1)));
+        return lowestCommonMultiple(nums[0], lowestCommonMultiple(...nums.slice(1)));
     }
 }
 
