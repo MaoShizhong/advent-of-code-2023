@@ -7,30 +7,12 @@ const cells = lines.map((line) => line.split(''));
 
 const START = 'S';
 const PIPE_CONNECTIONS = {
-    '|': [
-        { incoming: 'N', outgoing: 'N' },
-        { incoming: 'S', outgoing: 'S' },
-    ],
-    '-': [
-        { incoming: 'E', outgoing: 'E' },
-        { incoming: 'W', outgoing: 'W' },
-    ],
-    L: [
-        { incoming: 'S', outgoing: 'E' },
-        { incoming: 'W', outgoing: 'N' },
-    ],
-    J: [
-        { incoming: 'E', outgoing: 'N' },
-        { incoming: 'S', outgoing: 'W' },
-    ],
-    7: [
-        { incoming: 'E', outgoing: 'S' },
-        { incoming: 'N', outgoing: 'W' },
-    ],
-    F: [
-        { incoming: 'W', outgoing: 'S' },
-        { incoming: 'N', outgoing: 'E' },
-    ],
+    '|': { N: 'N', S: 'S' },
+    '-': { E: 'E', W: 'W' },
+    L: { S: 'E', W: 'N' },
+    J: { E: 'N', S: 'W' },
+    7: { E: 'S', N: 'W' },
+    F: { W: 'S', N: 'E' },
 };
 const ORTHOGONAL_OFFSETS = {
     N: [-1, 0],
@@ -54,18 +36,11 @@ while (currentCell.pipe !== START) {
     const checkedCell = cells[startY + offsetY][startX + offsetX];
 
     const isPipe = validPipes.includes(checkedCell);
-    const isConnected =
-        isPipe &&
-        PIPE_CONNECTIONS[checkedCell].some((directions) => directions.incoming === currentCell.to);
 
-    if (isPipe && isConnected) {
-        const newDirection = PIPE_CONNECTIONS[checkedCell].find(
-            (directions) => directions.incoming === currentCell.to
-        ).outgoing;
-
+    if (isPipe && Object.keys(PIPE_CONNECTIONS[checkedCell]).includes(currentCell.to)) {
         currentCell.pipe = checkedCell;
         currentCell.coordinates = [startY + offsetY, startX + offsetX];
-        currentCell.to = newDirection;
+        currentCell.to = PIPE_CONNECTIONS[checkedCell][currentCell.to];
         currentCell.distanceFromStart++;
     } else if (checkedCell === START) {
         currentCell.pipe = START;
@@ -93,9 +68,7 @@ function getStartToDirection(startCoords, arr) {
         const checkedCell = arr[startY + offsetY][startX + offsetX];
 
         const isPipe = validPipes.includes(checkedCell);
-        const isConnected =
-            isPipe &&
-            PIPE_CONNECTIONS[checkedCell].find((directions) => directions.incoming === direction);
+        const isConnected = isPipe && PIPE_CONNECTIONS[checkedCell][direction];
 
         if (isPipe && isConnected) {
             return direction;
