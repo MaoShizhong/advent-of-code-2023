@@ -2,7 +2,7 @@ import { dataToStringArray } from '../readFile.js';
 
 console.time('Execution time');
 
-const EXPANSION_FACTOR = 2;
+const EXPANSION_FACTOR = 1000000;
 const EXPANSION_CORRECTION = EXPANSION_FACTOR - 1;
 
 const smallSpace = dataToStringArray('data.txt', import.meta.url);
