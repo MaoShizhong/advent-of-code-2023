@@ -77,3 +77,5 @@ function getPermutations(arrangement, permutations, i = 0) {
         getPermutations(arrangement, permutations, i + 1);
     }
 }
+
+console.timeEnd('Execution time');
